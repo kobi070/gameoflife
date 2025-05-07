@@ -172,3 +172,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# .sh Scripts
+*.sh
+# .bat Scripts
+*.bat
+# .ps1 Scripts
+*.ps1
