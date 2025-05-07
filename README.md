@@ -1,3 +1,1 @@
 # Game Of Life
-
-## Explenation
