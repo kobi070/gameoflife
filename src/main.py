@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import random
+
 
 def random_state(width: int, height: int) -> list[list[int]]:
     """Generate a ramdom state for the game of life
@@ -17,7 +19,32 @@ def random_state(width: int, height: int) -> list[list[int]]:
         >>> random_state(0, 0)
         []
     """
-    pass
+    # Initialize the state with all dead cells
+    state = dead_state(width, height)
+
+    # Randomly set some cells to alive
+
+
+def random(threshold: float) -> int:
+    """Generate a random boolean value based on a threshold
+    Args:
+        threshold (float): Threshold for the random number
+    Returns:
+        bool: 1 if the random number is less than the threshold, 0 otherwise
+    Example:
+        >>> random(0.5)
+        1
+        >>> random(0.1)
+        0
+        >>> random(0.9)
+        1
+    """
+    random_number = random.random()
+
+    if random_number < threshold:
+        return 1
+    else:
+        return 0
 
 
 def dead_state(width: int, height: int) -> list[list[int]]:
@@ -39,7 +66,3 @@ def dead_state(width: int, height: int) -> list[list[int]]:
     """
     state = [[0 for _ in range(width)] for _ in range(height)]
     return state
-
-
-state = dead_state(3, 3)
-print(state)
