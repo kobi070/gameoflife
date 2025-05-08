@@ -23,9 +23,14 @@ def random_state(width: int, height: int) -> list[list[int]]:
     state = dead_state(width, height)
 
     # Randomly set some cells to alive
+    for i in range(height):
+        for j in range(width):
+            # Set the cell to alive with a 50% chance
+            state[i][j] = random_cell(threshold=0.5)
+    return state
 
 
-def random(threshold: float) -> int:
+def random_cell(threshold: float) -> int:
     """Generate a random boolean value based on a threshold
     Args:
         threshold (float): Threshold for the random number
