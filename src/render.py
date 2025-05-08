@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 def render(state: list[list[int]]) -> str:
     """Render the game of life state as a string
     Args:
@@ -8,10 +9,14 @@ def render(state: list[list[int]]) -> str:
         str: Rendered state
     Example:
         >>> render([[0, 1], [1, 0]])
-        '  *\n*  '
+        '  #\n#  '
         >>> render([[1, 1], [1, 1]])
-        '**\n**'
+        '##\n##'
         >>> render([[0, 0], [0, 0]])
         '  \n  '
     """
-    return '\n'.join([''.join(['*' if cell else ' ' for cell in row]) for row in state])
+    return "\n".join(["".join(["#" if cell else " " for cell in row]) for row in state])
+
+
+board = [[0, 1, 0], [1, 0, 1], [0, 0, 1]]
+print(render(board))
