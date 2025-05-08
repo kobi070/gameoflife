@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from main import random_state
 
+
 def render(state: list[list[int]]) -> str:
     """Render the game of life state as a string
     Args:
@@ -15,7 +16,16 @@ def render(state: list[list[int]]) -> str:
         >>> render([[0, 0], [0, 0]])
         '  \n  '
     """
-    return "\n".join(["".join(["#" if cell else " " for cell in row]) for row in state])
+    # Each string (alive, dead) represents how the console preseves 0/1
+    # TODO: allow the user to chose which ch will represent alive string
+    alive = "#"
+    dead = "    "
+
+    # rendered_state holds the entire string which in printed into the 
+    rendered_state = "\n".join(
+        ["".join([alive if cell else dead for cell in row]) for row in state]
+    )
+    return rendered_state
 
 
 grid = random_state(width=10, height=10)
