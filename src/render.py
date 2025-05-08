@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+from main import random_state
 
 def render(state: list[list[int]]) -> str:
     """Render the game of life state as a string
@@ -18,5 +18,5 @@ def render(state: list[list[int]]) -> str:
     return "\n".join(["".join(["#" if cell else " " for cell in row]) for row in state])
 
 
-board = [[0, 1, 0], [1, 0, 1], [0, 0, 1]]
-print(render(board))
+grid = random_state(width=10, height=10)
+print(render(grid))
