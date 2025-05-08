@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def random_state(width: int, height: int) -> list[list[int]]:
     """Generate a ramdom state for the game of life
     Args:
