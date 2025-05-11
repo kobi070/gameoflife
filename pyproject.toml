@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [project.scripts]
-game-of-life = "utils.menu:main"
+game-of-life = "main:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]
