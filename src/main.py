@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 import random
 import time
-from render import render
-from dataclasses import dataclass
+from gameoflife.src.utils.render import render
 from src.utils.config import Config
 
 # Global config object to update settings
