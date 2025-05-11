@@ -1,6 +1,3 @@
-Certainly! Here's an expanded version of your README with more details and explanations.
-
----
 
 # Game Of Life
 
