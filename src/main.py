@@ -131,39 +131,5 @@ def next_state(state: list[list[int]]) -> list[list[int]]:
     return nx_state
 
 
-def is_edge(x: int, y: int, length: int) -> bool:
-    """Checks if the cell is the edge of the grid"""
-    # Edges = [0,0], [0, N-1], [N-1, 0], [N-1, N-1] where N = length of the 2D Array
-    # if N = even => N = 4 => 3 * 2 = 9 is the last sum of cells
-    # if N = odd => N = 5 => 4 * 2 = 4 is the last sum of cells
-    sum_of_index = x + y
-    return (
-        sum_of_index == 0
-        or sum_of_index == (length - 1)
-        or sum_of_index == (2 * (length - 1))
-    )
-
-
-def is_middle(x: int, y: int, length: int) -> bool:
-    """Checks if we are on the first/last row/col in the middle of the row/col"""
-    coord_possible_vals = [a for a in range(1, length)]
-    coord_possible_pair = [a for a in range(1, length - 1)]
-
-    if (
-        x in coord_possible_vals
-        and y in coord_possible_pair
-        or y in coord_possible_vals
-        and x in coord_possible_pair
-    ):
-        return True
-    return False
-
-
-def is_alive(num: int) -> CellStatus:
-    if num == CellStatus.ALIVE:
-        return CellStatus.ALIVE
-    return CellStatus.DEAD
-
-
 if __name__ == "main":
     pass
