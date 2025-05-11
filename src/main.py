@@ -2,6 +2,7 @@
 import random
 import time
 from render import render
+from dataclasses import dataclass
 
 """
 Rules:
@@ -127,14 +128,48 @@ def next_state(state: list[list[int]]) -> list[list[int]]:
     return nx_state
 
 
-def game_loop():
-    state = random_state(10, 10)
-    render(state=state)
-    while True:
-        state = next_state(state=state)
-        render(state=state)
-        time.sleep(6000)
+@dataclass
+class Config:
+    """Defines the params we allow the user to change in the game settings"""
+
+    width: int
+    height: int
+    threshhold: float
+    lifecycle: int
+    living_ch: chr
+
+    def setSize(self, width: int, height: int) -> None:
+        self.width = width
+        self.height = height
+
+    def setThreshold(self, th: float) -> None:
+        self.threshhold = th
+
+    def setLifecycle(self, lfc: int) -> None:
+        self.lifecycle = lfc
+
+    def setLiveCh(self, liveCh: chr) -> None:
+        self.living_ch = liveCh
 
 
-if __name__ == "main":
-    pass
+def game_loop(config: Config) -> None:
+    """Main game loop that runs the Game of Life."""
+    state = random_state(config.width, config.height)
+
+    for cycle in range(config.lifecycle):
+        print(f"\nCycle: {cycle + 1}/{config.lifecycle}")
+        render(state=state, living_ch=config.living_ch)
+        state = next_state(state)
+        time.sleep(0.5)  # Adjust speed here
+
+
+if __name__ == "__main__":
+    # Example configuration
+    config = Config(
+        width=10,
+        height=10,
+        threshhold=0.5,
+        lifecycle=20,
+        living_ch="■",  # Unicode square character
+    )
+    game_loop(config)
