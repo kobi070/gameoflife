@@ -25,3 +25,23 @@ Then some extensions:
 - Improve the User Interface
 - Change the rules of Life
 
+### Requirements
+
+To run this cli app you need venv (or python >= 3.12)
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+Install the dependncies
+
+```bash
+pip install -r requirements.txt
+```
+
+To Run the game run:
+
+```bash
+python -m src.utils.menu.py
+```

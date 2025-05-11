@@ -3,7 +3,6 @@ import random
 import time
 from gameoflife.src.utils.render import render
 from src.utils.config import Config
-
 # Global config object to update settings
 BASIC_CONFIG = Config(width=10, height=10, threshhold=0.5, lifecycle=5, living_ch="■")
 
