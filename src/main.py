@@ -2,6 +2,14 @@
 import random
 from enum import Enum
 
+"""
+Rules:
+        Any live cell with 0 or 1 live neighbors becomes dead, because of underpopulation
+        Any live cell with 2 or 3 live neighbors stays alive, because its neighborhood is just right
+        Any live cell with more than 3 live neighbors becomes dead, because of overpopulation
+        Any dead cell with exactly 3 live neighbors becomes alive, by reproduction
+"""
+
 
 class CellStatus(Enum):
     DEAD = 0
@@ -79,45 +87,9 @@ def dead_state(width: int, height: int) -> list[list[int]]:
     return state
 
 
-def next_state(state: list[list[int]]) -> list[list[int]]:
-    """Generate the next board state game based on the rule of game of life
-    Args:
-        state (list[list[int]]): current state
-    Returns:
-        list[list[int]]: Next state
-    Rules:
-        Any live cell with 0 or 1 live neighbors becomes dead, because of underpopulation
-        Any live cell with 2 or 3 live neighbors stays alive, because its neighborhood is just right
-        Any live cell with more than 3 live neighbors becomes dead, because of overpopulation
-        Any dead cell with exactly 3 live neighbors becomes alive, by reproduction
-    """
-    # Initialize the next state as a dead_state
-    nx_state = dead_state(width=len(state), height=len(state))
-    for i in range(len(state)):
-        for j in range(len(state)):
-            if is_edge(x=i, y=j, length=len(state)):
-                # Checks the sum of 3 neighbors
-                sum_of_3 = state[i + 1, j] + state[i, j + 1] + state[i + 1, j + 1]
-                if sum_of_3 in [0, 1]:
-                    nx_state[i][j] = CellStatus.DEAD.value
-
-                if sum_of_3 in [2, 3]:
-                    nx_state[i][j] = CellStatus.ALIVE.value
-
-                if is_alive(num=state[i][j]) is CellStatus.DEAD and sum_of_3 == 3:
-                    nx_state[i][j] = CellStatus.ALIVE.value
-
-                if is_alive(num=state[i][j]) is CellStatus.ALIVE and sum_of_3 > 3:
-                    nx_state[i][j] = CellStatus.DEAD.value
-
-            elif is_middle(x=i, y=j, length=len(state)):
-                pass
-            else:
-                print("We are on a cell with eight neighbors")
-    pass
-
-
-def count_neighbors(state: list[list[int]], x: int, y: int, rows: int, cols: int) -> int:
+def count_neighbors(
+    state: list[list[int]], x: int, y: int, rows: int, cols: int
+) -> int:
     # Count all live neighbors around (x, y)
     directions = [
         (-1, -1),
@@ -137,14 +109,14 @@ def count_neighbors(state: list[list[int]], x: int, y: int, rows: int, cols: int
     return count
 
 
-def next_state_v2(state: list[list[int]]) -> list[list[int]]:
+def next_state(state: list[list[int]]) -> list[list[int]]:
     """Generate the next board state based on Game of Life rules."""
     rows, cols = len(state), len(state[0])
     nx_state = dead_state(width=rows, height=cols)
 
     for i in range(rows):
         for j in range(cols):
-            neighbors = count_neighbors(i, j)
+            neighbors = count_neighbors(state, i, j, rows, cols)
             if state[i][j] == 1:  # Alive
                 if neighbors in [2, 3]:
                     nx_state[i][j] = 1  # Survives
@@ -193,4 +165,5 @@ def is_alive(num: int) -> CellStatus:
     return CellStatus.DEAD
 
 
-print(is_alive(num=1))
+if __name__ == "main":
+    pass
