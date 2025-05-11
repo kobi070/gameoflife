@@ -24,4 +24,4 @@ def render(state: list[list[int]], living_ch: chr) -> str:
     rendered_state = "\n".join(
         ["".join([alive if cell else dead for cell in row]) for row in state]
     )
-    return rendered_state
+    return print(rendered_state)

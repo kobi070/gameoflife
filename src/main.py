@@ -155,7 +155,7 @@ class Config:
 def game_loop(config: Config) -> None:
     """Main game loop that runs the Game of Life."""
     state = random_state(config.width, config.height)
-
+    render(state=state, living_ch=config.living_ch)
     for cycle in range(config.lifecycle):
         print(f"\nCycle: {cycle + 1}/{config.lifecycle}")
         render(state=state, living_ch=config.living_ch)
