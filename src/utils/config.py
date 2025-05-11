@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Config:
     """Defines the params we allow the user to change in the game settings"""
