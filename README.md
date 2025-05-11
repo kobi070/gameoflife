@@ -113,7 +113,7 @@ To run this project, you will need **Python 3.12** or later. The recommended app
    To run the game, execute the following command:
 
    ```bash
-   python -m src.utils.menu
+   python -m src.main
    ```
 
    This will launch the interactive menu, from which you can start the Game of Life and adjust settings.
