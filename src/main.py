@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import random
 import time
+from render import render
 
 """
 Rules:
@@ -128,9 +129,11 @@ def next_state(state: list[list[int]]) -> list[list[int]]:
 
 def game_loop():
     state = random_state(10, 10)
+    render(state=state)
     while True:
-        time.sleep(6000)
         state = next_state(state=state)
+        render(state=state)
+        time.sleep(6000)
 
 
 if __name__ == "main":
