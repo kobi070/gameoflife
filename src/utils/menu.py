@@ -3,7 +3,7 @@
 import os
 from typing import Callable
 from dataclasses import dataclass
-from pretty_title import pretty_title
+from gameoflife.src.utils.pretty_title import pretty_title
 from main import game_loop, BASIC_CONFIG
 
 

@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 import random
 import time
-from render import render
-from dataclasses import dataclass
+from gameoflife.src.utils.render import render
+from src.utils.config import Config
+
+# Global config object to update settings
+BASIC_CONFIG = Config(width=10, height=10, threshhold=0.5, lifecycle=5, living_ch="■")
 
 
 """
@@ -127,34 +130,6 @@ def next_state(state: list[list[int]]) -> list[list[int]]:
                     nx_state[i][j] = 0  # Stays dead
 
     return nx_state
-
-
-@dataclass
-class Config:
-    """Defines the params we allow the user to change in the game settings"""
-
-    width: int
-    height: int
-    threshhold: float
-    lifecycle: int
-    living_ch: chr
-
-    def setSize(self, width: int, height: int) -> None:
-        self.width = width
-        self.height = height
-
-    def setThreshold(self, th: float) -> None:
-        self.threshhold = th
-
-    def setLifecycle(self, lfc: int) -> None:
-        self.lifecycle = lfc
-
-    def setLiveCh(self, liveCh: chr) -> None:
-        self.living_ch = liveCh
-
-
-# Global config object to update settings
-BASIC_CONFIG = Config(width=10, height=10, threshhold=0.5, lifecycle=5, living_ch="■")
 
 
 def game_loop(config: Config) -> None:

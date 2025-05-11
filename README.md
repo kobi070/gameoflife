@@ -24,3 +24,4 @@ Then some extensions:
 - Save interesting starting positions to files and add the ability to reload them into your Life
 - Improve the User Interface
 - Change the rules of Life
+
