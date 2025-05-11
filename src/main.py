@@ -11,11 +11,6 @@ Rules:
 """
 
 
-class CellStatus(Enum):
-    DEAD = 0
-    ALIVE = 1
-
-
 def random_state(width: int, height: int) -> list[list[int]]:
     """Generate a ramdom state for the game of life
     Args:
