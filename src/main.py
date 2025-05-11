@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import random
+import time
 
 """
 Rules:
@@ -123,6 +124,13 @@ def next_state(state: list[list[int]]) -> list[list[int]]:
                     nx_state[i][j] = 0  # Stays dead
 
     return nx_state
+
+
+def game_loop():
+    state = random_state(10, 10)
+    while True:
+        time.sleep(6000)
+        state = next_state(state=state)
 
 
 if __name__ == "main":
