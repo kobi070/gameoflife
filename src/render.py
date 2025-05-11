@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from main import random_state
 
 
 def render(state: list[list[int]]) -> str:
@@ -21,12 +20,8 @@ def render(state: list[list[int]]) -> str:
     alive = "#"
     dead = "    "
 
-    # rendered_state holds the entire string which in printed into the 
+    # rendered_state holds the entire string which in printed into the
     rendered_state = "\n".join(
         ["".join([alive if cell else dead for cell in row]) for row in state]
     )
     return rendered_state
-
-
-grid = random_state(width=10, height=10)
-print(render(grid))
