@@ -1,106 +1,46 @@
 #!/usr/bin/env python3
+
 import random
 import time
-from gameoflife.src.utils.render import render
+from src.utils.render import render
 from src.utils.config import Config
+from utils.menu import (
+    UserMenu,
+    change_char,
+    change_grid_size,
+    change_lifecycle,
+    change_threshold,
+)  # Importing UserMenu and etc from menu.py
+
 # Global config object to update settings
 BASIC_CONFIG = Config(width=10, height=10, threshhold=0.5, lifecycle=5, living_ch="■")
 
 
-"""
-Rules:
-        Any live cell with 0 or 1 live neighbors becomes dead, because of underpopulation
-        Any live cell with 2 or 3 live neighbors stays alive, because its neighborhood is just right
-        Any live cell with more than 3 live neighbors becomes dead, because of overpopulation
-        Any dead cell with exactly 3 live neighbors becomes alive, by reproduction
-"""
-
-
 def random_state(width: int, height: int) -> list[list[int]]:
-    """Generate a ramdom state for the game of life
-    Args:
-        width (int): Width of the state
-        height (int): Height of the state
-    Returns:
-        list[list[int]]: Random state
-    Example:
-        >>> random_state(3, 3)
-        [[0, 1, 0], [1, 0, 1], [0, 0, 1]]
-        >>> random_state(2, 2)
-        [[1, 0], [0, 1]]
-        >>> random_state(1, 1)
-        [[0]]
-        >>> random_state(0, 0)
-        []
-    """
-    # Initialize the state with all dead cells
+    """Generate a random state for the game of life."""
     state = dead_state(width, height)
-
-    # Randomly set some cells to alive
     for i in range(height):
         for j in range(width):
-            # Set the cell to alive with a 50% chance
             state[i][j] = random_cell(threshold=0.5)
     return state
 
 
 def random_cell(threshold: float) -> int:
-    """Generate a random boolean value based on a threshold
-    Args:
-        threshold (float): Threshold for the random number
-    Returns:
-        bool: 1 if the random number is less than the threshold, 0 otherwise
-    Example:
-        >>> random(0.5)
-        1
-        >>> random(0.1)
-        0
-        >>> random(0.9)
-        1
-    """
+    """Generate a random boolean value based on a threshold."""
     random_number = random.random()
-
-    if random_number < threshold:
-        return 1
-    else:
-        return 0
+    return 1 if random_number < threshold else 0
 
 
 def dead_state(width: int, height: int) -> list[list[int]]:
-    """Generate a dead state for the game of life
-    Args:
-        width (int): Width of the state
-        height (int): Height of the state
-    Returns:
-        list[list[int]]: Dead state
-    Example:
-        >>> dead_state(3, 3)
-        [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-        >>> dead_state(2, 2)
-        [[0, 0], [0, 0]]
-        >>> dead_state(1, 1)
-        [[0]]
-        >>> dead_state(0, 0)
-        []
-    """
-    state = [[0 for _ in range(width)] for _ in range(height)]
-    return state
+    """Generate a dead state for the game of life."""
+    return [[0 for _ in range(width)] for _ in range(height)]
 
 
 def count_neighbors(
     state: list[list[int]], x: int, y: int, rows: int, cols: int
 ) -> int:
-    # Count all live neighbors around (x, y)
-    directions = [
-        (-1, -1),
-        (-1, 0),
-        (-1, 1),
-        (0, -1),
-        (0, 1),
-        (1, -1),
-        (1, 0),
-        (1, 1),
-    ]
+    """Count all live neighbors around (x, y)."""
+    directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
     count = 0
     for dx, dy in directions:
         nx, ny = x + dx, y + dy
@@ -117,17 +57,14 @@ def next_state(state: list[list[int]]) -> list[list[int]]:
     for i in range(rows):
         for j in range(cols):
             neighbors = count_neighbors(state, i, j, rows, cols)
-            if state[i][j] == 1:  # Alive
+            if state[i][j] == 1:
                 if neighbors in [2, 3]:
                     nx_state[i][j] = 1  # Survives
                 else:
                     nx_state[i][j] = 0  # Dies
-            else:  # Dead
+            else:
                 if neighbors == 3:
                     nx_state[i][j] = 1  # Reproduction
-                else:
-                    nx_state[i][j] = 0  # Stays dead
-
     return nx_state
 
 
@@ -142,13 +79,45 @@ def game_loop(config: Config) -> None:
         time.sleep(0.5)  # Adjust speed here
 
 
-if __name__ == "__main__":
-    # Example configuration
-    config = Config(
-        width=10,
-        height=10,
-        threshhold=0.5,
-        lifecycle=20,
-        living_ch="■",  # Unicode square character
+def main():
+    menu = """
+Choose an action:
+1. Start Game Of Life
+2. Settings Game Of Life
+Q. Quit
+"""
+
+    sub_menu = """
+Settings:
+1. Change Grid Size (N x N)
+2. Change Threshold (0 -> 1.0)
+3. Change Lifecycle numbers (2 -> N)
+4. Change which char is living cells (#, *, Etc)
+Q. Back
+"""
+
+    settings_menu = UserMenu(
+        menu=sub_menu,
+        actions={
+            "1": lambda: change_grid_size(BASIC_CONFIG),
+            "2": lambda: change_threshold(BASIC_CONFIG),
+            "3": lambda: change_lifecycle(BASIC_CONFIG),
+            "4": lambda: change_char(BASIC_CONFIG),
+        },
     )
-    game_loop(config)
+
+    actions = {
+        "1": lambda: game_loop(config=BASIC_CONFIG),
+        "2": settings_menu.display_menu,
+        "q": lambda: print("Quitting..."),
+    }
+
+    menu_instance = UserMenu(
+        menu=menu,
+        actions=actions,
+    )
+    menu_instance.display_menu()
+
+
+if __name__ == "__main__":
+    main()
