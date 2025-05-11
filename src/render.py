@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-def render(state: list[list[int]]) -> str:
+def render(state: list[list[int]], living_ch: chr) -> str:
     """Render the game of life state as a string
     Args:
         state (list[list[int]]): State of the game of life
@@ -17,7 +17,7 @@ def render(state: list[list[int]]) -> str:
     """
     # Each string (alive, dead) represents how the console preseves 0/1
     # TODO: allow the user to chose which ch will represent alive string
-    alive = "#"
+    alive = living_ch
     dead = "    "
 
     # rendered_state holds the entire string which in printed into the
