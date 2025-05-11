@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # TODO: Fix not being able to get the next_state function from main module
-from main import next_state
+from src.main import next_state
 
 print("Tests :")
 print("Test 0 - Test if we get a all Dead grid and returns all dead grid")
