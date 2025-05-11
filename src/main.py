@@ -2,8 +2,8 @@
 
 import random
 import time
-from src.utils.render import render
-from src.utils.config import Config
+from utils.render import render
+from utils.config import Config
 from utils.menu import (
     UserMenu,
     change_char,
