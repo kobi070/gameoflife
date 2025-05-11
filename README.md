@@ -144,6 +144,7 @@ gameoflife/
 │   │   ├── render.py
 │   │   ├── config.py
 │   │   ├── menu.py
+│   │   ├── pretty_title.py
 │   ├── main.py
 │   └── __init__.py
 ├── requirements.txt
