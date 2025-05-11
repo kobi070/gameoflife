@@ -4,6 +4,7 @@ import time
 from render import render
 from dataclasses import dataclass
 
+
 """
 Rules:
         Any live cell with 0 or 1 live neighbors becomes dead, because of underpopulation
@@ -150,6 +151,10 @@ class Config:
 
     def setLiveCh(self, liveCh: chr) -> None:
         self.living_ch = liveCh
+
+
+# Global config object to update settings
+BASIC_CONFIG = Config(width=10, height=10, threshhold=0.5, lifecycle=5, living_ch="■")
 
 
 def game_loop(config: Config) -> None:

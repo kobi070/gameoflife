@@ -4,10 +4,7 @@ import os
 from typing import Callable
 from dataclasses import dataclass
 from pretty_title import pretty_title
-from main import game_loop, Config
-
-# Global config object to update settings
-BASIC_CONFIG = Config(width=10, height=10, threshhold=0.5, lifecycle=5, living_ch="#")
+from main import game_loop, BASIC_CONFIG
 
 
 @dataclass
